@@ -1,0 +1,31 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Jan 11 16:30:05 2026
+
+@author: yvannlandure
+"""
+
+#Importation des bibliothèques de travail
+import numpy as np
+import yfinance as yf
+import scipy.stats 
+import pandas as pd
+
+#importation des données
+tickers = ["BZ=F", "CL=F"]
+dataset = yf.download(tickers, period ="3Y")["Close"]
+
+#nettoyage des données et Gestion des lignes vides
+dataset_clean = dataset.dropna()
+print (dataset_clean.head())
+
+#Création de la série temporelle de l'écart Brent-WTI
+
+import matplotlib.pyplot as plt
+from statsmodels.tsa.stattools import adfuller #pour le test
+#Calcul du spread
+dataset_clean['Spread'] = dataset_clean['BZ=F']-dataset_clean['CL=F']
+
+#test adfuller
+result = adfuller(dataset_clean['Spread'].dropna())

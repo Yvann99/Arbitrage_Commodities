@@ -5,6 +5,7 @@ Created on Sun Jan 11 17:07:52 2026
 
 @author: yvannlandure
 """
+'requirements for the project'
 
 pandas
 numpy

@@ -30,4 +30,11 @@ dataset_clean['Spread'] = dataset_clean['BZ=F']-dataset_clean['CL=F'] #si la col
 result = adfuller(dataset_clean['Spread'].dropna())
 
 #Affichage des résultats du test
-print(result)
+adf_value = result[0]
+p_value = result[1]
+valeurs_critiques = result[2]
+print("-"*15)
+print(f"Statistique du test ADF: {adf_value:.4f}")
+print("-"*15)
+print(f"p_value du test ADF: {p_value:.4f}")
+print("-"*15)

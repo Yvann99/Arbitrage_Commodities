@@ -21,11 +21,13 @@ dataset_clean = dataset.dropna()
 print (dataset_clean.head())
 
 #Création de la série temporelle de l'écart Brent-WTI
-
 import matplotlib.pyplot as plt
 from statsmodels.tsa.stattools import adfuller #pour le test
 #Calcul du spread
-dataset_clean['Spread'] = dataset_clean['BZ=F']-dataset_clean['CL=F']
+dataset_clean['Spread'] = dataset_clean['BZ=F']-dataset_clean['CL=F'] #si la colonne n'existe pas, elle est créée
 
 #test adfuller
 result = adfuller(dataset_clean['Spread'].dropna())
+
+#Affichage des résultats du test
+print(result)

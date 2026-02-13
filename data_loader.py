@@ -38,3 +38,20 @@ print(f"Statistique du test ADF: {adf_value:.4f}")
 print("-"*15)
 print(f"p_value du test ADF: {p_value:.4f}")
 print("-"*15)
+
+# Calcul de la moyenne et de l'écart-type mobiles (ex: fenêtre de 20 jours)
+window = 20
+dataset_clean['Mean'] = dataset_clean['Spread'].rolling(window=window).mean()
+dataset_clean['Stdev'] = dataset_clean['Spread'].rolling(window=window).std()
+
+# Calcul du Z-Score
+dataset_clean['Z-Score'] = (dataset_clean['Spread'] - dataset_clean['Mean']) / dataset_clean['Stdev']
+
+##Tracé du z-score
+plt.figure(figsize=(12,6))
+dataset_clean['Z-Score'].plot()
+plt.axhline(0, color='black')
+plt.axhline(2, color='red', linestyle='--')
+plt.axhline(-2, color='green', linestyle='--')
+plt.title("Z-Score du Spread Brent-WTI")
+plt.show()
